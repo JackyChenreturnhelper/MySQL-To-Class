@@ -13,23 +13,26 @@ namespace ConsoleApp1
 
 		static void Main(string[] args)
 		{
-			string ConnectionStrings = "server=192.168.99.100;port=3306;database=test;user=root;password=123456;SslMode=None;charset=utf8mb4;old guids=true;";
+			Console.WriteLine("\nWhat is your ConnectionStrings? ");
+			string ConnectionStrings = Console.ReadLine();
 
 			var connection = GetConnection(ConnectionStrings);
+			Console.WriteLine("\nWhat is  Class Name? ");
 			// 設定 Class Name
-			var className = "RoadModel";
+			var className = Console.ReadLine();
+			Console.WriteLine("\nWhat is Table Name?  多筆用, 分開");
 			// 設定要查找註解的 Table Name, 多筆用 "," 分開
-			var tables = @"blog";
-
+			var tables = Console.ReadLine(); 
+			Console.WriteLine("\n SQL Command");
 			// 這邊修改為你要執行的 SQL Command
-			var sqlCommand = @"SELECT t.*
-      FROM test.blog t";
+			var sqlCommand = Console.ReadLine();
 
 			var dtAnnotation = GetAnnotation(connection, tables);
 
-			var aa= DumpClassCSharp(connection, dtAnnotation, sqlCommand, className);
-
-			Console.WriteLine(aa);
+			var show= DumpClassCSharp(connection, dtAnnotation, sqlCommand, className);
+		
+		
+			Console.WriteLine(show);
 		}
 		public static IDbConnection GetConnection(string connectionString)
 		{
